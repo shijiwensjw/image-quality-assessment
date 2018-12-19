@@ -111,3 +111,10 @@ venv.bak/
 train_jobs
 _medium
 _readme/graphs.ipynb
+
+#sjw add
+data/TID2013/tid2013/
+job_sjw/
+test_img/
+
+

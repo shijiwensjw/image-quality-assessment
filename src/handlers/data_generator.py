@@ -42,6 +42,7 @@ class TrainDataGenerator(keras.utils.Sequence):
         for i, sample in enumerate(batch_samples):
             # load and randomly augment image
             img_file = os.path.join(self.img_dir, '{}.{}'.format(sample['image_id'], self.img_format))
+
             img = utils.load_image(img_file, self.img_load_dims)
             if img is not None:
                 img = utils.random_crop(img, self.img_crop_dims)
@@ -91,7 +92,10 @@ class TestDataGenerator(keras.utils.Sequence):
         for i, sample in enumerate(batch_samples):
             # load and randomly augment image
             img_file = os.path.join(self.img_dir, '{}.{}'.format(sample['image_id'], self.img_format))
-            img = utils.load_image(img_file, self.img_load_dims)
+            try:
+                img = utils.load_image(img_file, self.img_load_dims)
+            except:
+                print('No such file: ', img_file)
             if img is not None:
                 X[i, ] = img
 
