@@ -114,7 +114,6 @@ _readme/graphs.ipynb
 
 #sjw add
 data/TID2013/tid2013/
-job_sjw/
 test_img/
-
-
+job_sjw/logs
+job_sjw/weights

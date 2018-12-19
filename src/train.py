@@ -41,6 +41,9 @@ def train(base_model_name,
     # split samples in train and validation set, and initialize data generators
     samples_train, samples_test = train_test_split(samples, test_size=0.05, shuffle=True, random_state=10207)
 
+    print('samples_train number: ', len(samples_train))
+    print('samples_test number: ',len(samples_test))
+
     training_generator = TrainDataGenerator(samples_train,
                                             image_dir,
                                             batch_size,
@@ -58,7 +61,9 @@ def train(base_model_name,
     # initialize callbacks TensorBoardBatch and ModelCheckpoint
     tensorboard = TensorBoardBatch(log_dir=os.path.join(job_dir, 'logs'))
 
-    model_save_name = 'weights_'+base_model_name.lower()+'_{epoch:02d}_{val_loss:.3f}.hdf5'
+    # model_save_name = 'weights_'+base_model_name.lower()+'_{epoch:02d}_{val_loss:.3f}.hdf5'
+    model_save_name = 'weights_'+base_model_name.lower()+'.hdf5'
+
     model_file_path = os.path.join(job_dir, 'weights', model_save_name)
     model_checkpointer = ModelCheckpoint(filepath=model_file_path,
                                          monitor='val_loss',
@@ -123,7 +128,7 @@ if __name__ == '__main__':
     config = load_config(config_file)
 
     # samples_file = os.path.join(job_dir, 'samples.json')
-    samples_file = os.path.join(job_dir, 'tid_labels_test.json')
+    samples_file = os.path.join(job_dir, 'tid_labels_train.json')
     samples = load_samples(samples_file)
 
     train(samples=samples, job_dir=job_dir, image_dir=image_dir, **config)
