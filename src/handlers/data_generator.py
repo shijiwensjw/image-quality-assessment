@@ -4,11 +4,13 @@ import numpy as np
 import keras
 from utils import utils
 
+image_load_dim = None
+img_crop_dim = (64,64)
 
 class TrainDataGenerator(keras.utils.Sequence):
     '''inherits from Keras Sequence base object, allows to use multiprocessing in .fit_generator'''
     def __init__(self, samples, img_dir, batch_size, n_classes, basenet_preprocess, img_format,
-                 img_load_dims=(256, 256), img_crop_dims=(224, 224), shuffle=True):
+                 img_load_dims=image_load_dim, img_crop_dims=img_crop_dim, shuffle=True):
         self.samples = samples
         self.img_dir = img_dir
         self.batch_size = batch_size
@@ -62,7 +64,7 @@ class TrainDataGenerator(keras.utils.Sequence):
 class TestDataGenerator(keras.utils.Sequence):
     '''inherits from Keras Sequence base object, allows to use multiprocessing in .fit_generator'''
     def __init__(self, samples, img_dir, batch_size, n_classes, basenet_preprocess, img_format,
-                 img_load_dims=(224, 224)):
+                 img_load_dims=img_crop_dim):
         self.samples = samples
         self.img_dir = img_dir
         self.batch_size = batch_size
