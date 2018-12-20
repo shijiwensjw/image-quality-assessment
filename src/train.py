@@ -124,7 +124,7 @@ if __name__ == '__main__':
     ensure_dir_exists(os.path.join(job_dir, 'logs'))
 
     # config_file = os.path.join(job_dir, 'config.json')
-    config_file = os.path.join(job_dir, 'config_mobilenet_technical.json')
+    config_file = os.path.join(job_dir, 'config_vgg16_technical.json')
     config = load_config(config_file)
 
     # samples_file = os.path.join(job_dir, 'samples.json')
